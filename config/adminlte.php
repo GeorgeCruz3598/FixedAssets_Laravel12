@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Municipio de El Alto',
+    'title' => 'TuActivo',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Municipio de El Alto</b>',
+    'logo' => '<b>TuActivo</b>',
     //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     //'logo_img' => 'public/storage/logo_ea.jpg',
     //'logo_img_class' => 'brand-image img-circle elevation-3',
@@ -191,7 +191,7 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Layout-and-Styling-Configuration
     |
     */
-
+    //'classes_body' => 'bg-enterprise-theme transparent-adminlte',
     'classes_body' => '',
     'classes_brand' => '',
     'classes_brand_text' => '',
