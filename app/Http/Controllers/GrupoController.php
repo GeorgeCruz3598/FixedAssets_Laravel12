@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\GrupoRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+//sweetalert
+use Alert;
 
 class GrupoController extends Controller
 {
@@ -38,7 +40,7 @@ class GrupoController extends Controller
     public function store(GrupoRequest $request): RedirectResponse
     {
         Grupo::create($request->validated());
-
+        alert()->success('Exito!', 'El grupo ha sido creado.');
         return Redirect::route('grupos.index')
             ->with('success', 'Grupo created successfully.');
     }
@@ -69,7 +71,7 @@ class GrupoController extends Controller
     public function update(GrupoRequest $request, Grupo $grupo): RedirectResponse
     {
         $grupo->update($request->validated());
-
+        alert()->success('Exito!', 'El grupo ha sido actualizado.');
         return Redirect::route('grupos.index')
             ->with('success', 'Grupo updated successfully');
     }
@@ -77,6 +79,7 @@ class GrupoController extends Controller
     public function destroy($id): RedirectResponse
     {
         Grupo::find($id)->delete();
+        alert()->success('Exito!', 'El grupo ha sido eliminado.');
 
         return Redirect::route('grupos.index')
             ->with('success', 'Grupo deleted successfully');

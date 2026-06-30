@@ -9,6 +9,9 @@ use App\Http\Requests\EstadoRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+//sweetalert
+use Alert;
+
 class EstadoController extends Controller
 {
     /**
@@ -38,7 +41,7 @@ class EstadoController extends Controller
     public function store(EstadoRequest $request): RedirectResponse
     {
         Estado::create($request->validated());
-
+        alert()->success('Exito!', 'El estado ha sido creado.');
         return Redirect::route('estados.index')
             ->with('success', 'Estado created successfully.');
     }
@@ -69,7 +72,7 @@ class EstadoController extends Controller
     public function update(EstadoRequest $request, Estado $estado): RedirectResponse
     {
         $estado->update($request->validated());
-
+        alert()->success('Exito!', 'El estado ha sido actualizado.');
         return Redirect::route('estados.index')
             ->with('success', 'Estado updated successfully');
     }
@@ -77,6 +80,7 @@ class EstadoController extends Controller
     public function destroy($id): RedirectResponse
     {
         Estado::find($id)->delete();
+        alert()->success('Exito!', 'El estado ha sido eliminado.');
 
         return Redirect::route('estados.index')
             ->with('success', 'Estado deleted successfully');

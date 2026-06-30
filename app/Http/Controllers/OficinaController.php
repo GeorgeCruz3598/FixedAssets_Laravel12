@@ -9,6 +9,12 @@ use App\Http\Requests\OficinaRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+//Added for Reports
+use Barryvdh\DomPDF\Facade\Pdf;
+
+//sweetalert
+use Alert;
+
 class OficinaController extends Controller
 {
     /**
@@ -39,6 +45,7 @@ class OficinaController extends Controller
     {
         Oficina::create($request->validated());
 
+        alert()->success('Exito!', 'La oficina ha sido creada.');
         return Redirect::route('oficinas.index')
             ->with('success', 'Oficina created successfully.');
     }
@@ -70,6 +77,7 @@ class OficinaController extends Controller
     {
         $oficina->update($request->validated());
 
+        alert()->success('Exito!', 'La oficina ha sido actualizada.');
         return Redirect::route('oficinas.index')
             ->with('success', 'Oficina updated successfully');
     }
@@ -78,7 +86,24 @@ class OficinaController extends Controller
     {
         Oficina::find($id)->delete();
 
+        alert()->success('Exito!', 'La oficina ha sido eliminada.');
         return Redirect::route('oficinas.index')
             ->with('success', 'Oficina deleted successfully');
+    }
+
+      // for report
+    public function listpdf()
+    {
+        //dd("test OK");
+        $i = 0;
+        $oficinas = Oficina::all();
+        //carga vista
+                            //folder.view         
+        $pdf = Pdf::loadView('oficina.oficinaspdf', compact('oficinas','i'));
+        //vista en el navegador
+        return $pdf->stream('doc_oficinas.pdf');
+        //descarga del pdf
+        //return $pdf->download('doc_oficinas.pdf');
+        
     }
 }

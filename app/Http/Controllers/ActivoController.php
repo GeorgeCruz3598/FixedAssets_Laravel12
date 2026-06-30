@@ -18,6 +18,12 @@ use App\Models\Oficina;
 use App\Models\Responsable;
 use App\Models\Estado;
 
+//Added for Reports
+use Barryvdh\DomPDF\Facade\Pdf;
+
+//sweetalert
+use Alert;
+
 class ActivoController extends Controller
 {
     /**
@@ -66,7 +72,7 @@ class ActivoController extends Controller
             'oficinas_id' => $request->oficinas_id,
             'responsables_id' => $request->responsables_id,
         ]);
-
+        alert()->success('Exito!', 'El activo ha sido creado.');
         return Redirect::route('activos.index')
             ->with('success', 'Activo created successfully.');
     }
@@ -114,7 +120,7 @@ class ActivoController extends Controller
         }
 
         $activo->update($data);
-
+        alert()->success('Exito!', 'El activo ha sido actualizado.');
 
         return Redirect::route('activos.index')
             ->with('success', 'Activo updated successfully');
@@ -124,7 +130,37 @@ class ActivoController extends Controller
     {
         Activo::find($id)->delete();
 
+        alert()->success('Exito!', 'El activo ha sido eliminado.');
         return Redirect::route('activos.index')
             ->with('success', 'Activo deleted successfully');
+    }
+
+    // for report
+    public function listpdf()
+    {
+        //dd("test OK");
+        $i = 0;
+        $activos = Activo::all();
+        //carga vista
+                            //folder.view         
+        $pdf = Pdf::loadView('activo.activospdf', compact('activos','i'));
+        //vista en el navegador
+        return $pdf->stream('doc_activos.pdf');
+        //descarga del pdf
+        //return $pdf->download('doc_activos.pdf');
+        
+    }
+    public function detallepdf()
+    {
+        //dd("test OK");
+        $i = 0;
+        $activos = Activo::all();
+        //carga vista
+                            //folder.view         
+        $pdf = Pdf::loadView('activo.activosdetallepdf', compact('activos','i'));
+        //vista en el navegador
+        return $pdf->stream('doc_activos_detalle.pdf');
+        //descarga del pdf
+        //return $pdf->download('doc_activos.pdf');
     }
 }

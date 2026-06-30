@@ -26,9 +26,29 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+//FOR REPORTS
+Route::get('activospdf', [ActivoController::class, 'listpdf'])
+->name('activos.activospdf');
+
 //Add routes
 Route::resource('activos', ActivoController::class);
 Route::resource('estados', EstadoController::class);
 Route::resource('grupos', GrupoController::class);
 Route::resource('oficinas', OficinaController::class);
 Route::resource('responsables', ResponsableController::class);
+
+//FOR REPORTS ACTIVOS
+Route::get('activospdf', [ActivoController::class, 'listpdf'])
+->name('activos.activospdf');
+Route::get('activosdetallepdf', [ActivoController::class, 'detallepdf'])
+->name('activos.activosdetallepdf');
+
+//FOR REPORTS RESPONSABLES
+Route::get('responsablespdf', [ResponsableController::class, 'listpdf'])
+->name('responsables.responsablespdf');
+
+
+//FOR REPORTS OFICINAS
+Route::get('oficinaspdf', [OficinaController::class, 'listpdf'])
+->name('oficinas.oficinaspdf');
+

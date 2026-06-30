@@ -64,12 +64,12 @@ return [
     */
 
     'logo' => '<b>TuActivo</b>',
-    //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     //'logo_img' => 'public/storage/logo_ea.jpg',
-    //'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'El Alto',
+    'logo_img_alt' => 'TuActivo',
 
     /*
     |--------------------------------------------------------------------------
@@ -87,8 +87,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            //'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'path' => 'public/storage/logo_ea.jpg',
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => '',
             'class' => '',
             'width' => 50,
@@ -191,8 +190,8 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Layout-and-Styling-Configuration
     |
     */
-    //'classes_body' => 'bg-enterprise-theme transparent-adminlte',
-    'classes_body' => '',
+    'classes_body' => 'bg-enterprise-theme transparent-adminlte',
+    //'classes_body' => '',
     'classes_brand' => '',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
@@ -259,7 +258,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -349,63 +348,77 @@ return [
         ],
         */
         [
-            'text' => 'ACTIVOS',
-            'url' => '#',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Activos',
+            'url' => '/activos',
+            'icon' => 'fas fa-fw fa-box-open',
         ],
         
         [
-            'text' => 'RESPONSABLES',
-            'url' => '#',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Responsables',
+            'url' => '/responsables',
+            'icon' => 'fas fa-fw fa-user-check',
         ],
 
         [
-            'text' => 'OFICINAS',
-            'url' => '#',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Oficinas',
+            'url' => '/oficinas',
+            'icon' => 'fas fa-fw fa-building',
         ],
         
         [
-            'text' => 'GRUPOS',
-            'url' => '#',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Grupos',
+            'url' => '/grupos',
+            'icon' => 'fas fa-fw fa-cubes',
         ],
         
         [
-            'text' => 'ESTADOS',
-            'url' => '#',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Estados',
+            'url' => '/estados',
+            'icon' => 'fas fa-fw fa-flag',
         ],
 
-        ['header' => 'OTROS'],
+        ['header' => 'REPORTES'],
 
         [
-            'text' => 'REPORTES',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Activos',
+            'icon' => 'fas fa-fw fa-file-pdf',
+            'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'Reporte de Activos',
-                    'url' => '#',
+                    'text' => 'Lista de Activos',
+                    'url' => '/activospdf',
                 ],
                 [
-                    'text' => 'Reporte de Responsables',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'Reporte de Oficinas',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'Reporte de Grupos',
-                    'url' => '#',
-                ],    
-                [
-                    'text' => 'Reporte de Estados',
-                    'url' => '#',
+                    'text' => 'Reporte detallado',
+                    'url' => '/activosdetallepdf',
                 ],         
             ],       
         ],
+        [
+            'text' => 'Responsables',
+            'icon' => 'fas fa-fw fa-file-pdf',
+            'icon_color' => 'yellow',
+            'submenu' => [
+                [
+                    'text' => 'Lista de Responsables',
+                    'url' => '/responsablespdf',
+                ],
+                      
+            ],       
+        ],
+        [
+            'text' => 'Oficinas',
+            'icon' => 'fas fa-fw fa-file-pdf',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [
+                    'text' => 'Lista de Oficinas',
+                    'url' => '/oficinaspdf',
+                ],
+                       
+            ],       
+        ],
+
         /*
         [
             'text' => 'ACTIVOS',
@@ -448,7 +461,9 @@ return [
             ],
         ],
         */
-
+        ['header' => 'Help/Support'],
+        
+        /*
         ['header' => 'labels'],
         [
             'text' => 'important',
@@ -465,6 +480,7 @@ return [
             'icon_color' => 'cyan',
             'url' => '#',
         ],
+        */
     ],
 
     /*
@@ -620,4 +636,6 @@ return [
     */
 
     'livewire' => false,
+    /* Ensure Vite loads your CSS */
+    'use_vite' => true,
 ];

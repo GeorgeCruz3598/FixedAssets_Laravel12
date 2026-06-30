@@ -11,6 +11,11 @@ use Illuminate\View\View;
 
 use Illuminate\Support\Facades\Storage;  // added
 
+//Added for Reports
+use Barryvdh\DomPDF\Facade\Pdf;
+// sweetalert
+use Alert;
+
 class ResponsableController extends Controller
 {
     /**
@@ -47,6 +52,7 @@ class ResponsableController extends Controller
             'nombre' => $request->nombre,
             'foto' => $ruta_imagen,
         ]);
+        alert()->success('Exito!', 'El responsable ha sido creado.');
         return Redirect::route('responsables.index')
             ->with('success', 'Responsable created successfully.');
     }
@@ -90,7 +96,7 @@ class ResponsableController extends Controller
         }
 
         $responsable->update($data);
-
+        alert()->success('Exito!', 'El responsable ha sido actualizado.');
         return Redirect::route('responsables.index')
             ->with('success', 'Responsable updated successfully');
     }
@@ -98,8 +104,26 @@ class ResponsableController extends Controller
     public function destroy($id): RedirectResponse
     {
         Responsable::find($id)->delete();
+        alert()->success('Exito!', 'El responsable ha sido eliminado.');
 
         return Redirect::route('responsables.index')
             ->with('success', 'Responsable deleted successfully');
     }
+
+    // for report
+    public function listpdf()
+    {
+        //dd("test OK");
+        $i = 0;
+        $responsables = Responsable::all();
+        //carga vista
+                            //folder.view         
+        $pdf = Pdf::loadView('responsable.responsablespdf', compact('responsables','i'));
+        //vista en el navegador
+        return $pdf->stream('doc_responsables.pdf');
+        //descarga del pdf
+        //return $pdf->download('doc_responsables.pdf');
+        
+    }
+   
 }
