@@ -391,7 +391,11 @@ return [
                 [
                     'text' => 'Reporte detallado',
                     'url' => '/activosdetallepdf',
-                ],         
+                ], 
+                [
+                    'text' => 'Imprimir QR de activos',
+                    'url' => '/activos_qr',
+                ],                 
             ],       
         ],
         [

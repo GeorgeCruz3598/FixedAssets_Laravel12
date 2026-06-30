@@ -163,4 +163,19 @@ class ActivoController extends Controller
         //descarga del pdf
         //return $pdf->download('doc_activos.pdf');
     }
+
+    //print qr activos
+    public function print_qr()
+    {
+        $activos = Activo::all();
+
+        // Load the view and pass the data
+        //printactivos_qr is the blade view that will be used to generate the PDF
+        $pdf = Pdf::loadView('activo.printactivos_qr', compact('activos'));
+
+        // Output the PDF to the browser
+        //activos_qr is the name of the PDF file that will be generated
+        return $pdf->stream('activos_qr.pdf');
+    }
+
 }
